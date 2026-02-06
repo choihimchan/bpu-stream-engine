@@ -1,7 +1,5 @@
 # BPU Stream Engine
 
-# BPU Stream Engine
-
 ## Demo
 
 ![Demo](demo.gif)
