@@ -179,6 +179,19 @@ Stress: Enabled
 - Sync
 - FPGA offload
 
+
+## Quick Start
+
+1. Flash firmware to ESP32-WROOM
+2. Flash bridge firmware to ESP32-S3
+3. Connect UART (TX/RX/GND)
+4. Connect S3 to PC via USB
+
+Run viewer:
+
+pip install pyserial matplotlib
+python bpu_mat_viewer.py COM11
+
 ---
 
 ## License
