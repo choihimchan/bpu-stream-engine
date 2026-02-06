@@ -159,6 +159,6 @@ This repository is suitable as a reference implementation for embedded serial st
 
 ## Author
 
-Himchan Choi  
+choihimchan 
 Embedded Systems / Streaming Engine Development  
 GitHub: https://github.com/choihimchan
