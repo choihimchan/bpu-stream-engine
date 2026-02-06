@@ -49,27 +49,24 @@ ESP32-S3 (Bridge)
         |
        PC Viewer
 
----
-
 ## Repository Structure
 
+```
 bpu-stream-engine/
- ├ s3_uart_bridge/
- │   └ s3_uart_bridge.ino
+ ├─ s3_uart_bridge/
+ │   └─ s3_uart_bridge.ino
  │
- ├ bpu_r4_safe.ino
- ├ bpu_r4.cpp
- ├ bpu_r4.h
+ ├─ bpu_r4_safe.ino
+ ├─ bpu_r4.cpp
+ ├─ bpu_r4.h
  │
- ├ bpu_decode.py
- ├ bpu_draw_viewer.py
- ├ bpu_mat_viewer.py
+ ├─ bpu_decode.py
+ ├─ bpu_draw_viewer.py
+ ├─ bpu_mat_viewer.py
  │
- ├ demo.gif
- └ README.md
-
----
-
+ ├─ demo.gif
+ └─ README.md
+```
 ## Firmware
 
 ### Main Files
