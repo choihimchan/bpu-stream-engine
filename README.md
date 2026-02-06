@@ -1,5 +1,12 @@
 # BPU Stream Engine
 
+# BPU Stream Engine
+
+## Demo
+
+![Demo](demo.gif)
+
+
 High-speed realtime streaming engine demo using ESP32 devices.
 
 This project demonstrates a reliable serial data pipeline:
