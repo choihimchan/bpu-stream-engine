@@ -1,10 +1,5 @@
 # BPU Stream Engine
 
-## Demo
-
-![Demo](demo.gif)
-
-
 High-speed realtime streaming engine demo using ESP32 devices.
 
 This project demonstrates a reliable serial data pipeline:
@@ -13,6 +8,21 @@ ESP32-WROOM → ESP32-S3 → PC
 with COBS framing, CRC16 validation, and live visualization.
 
 Designed for stress-testing embedded streaming systems.
+
+---
+
+## Demo
+
+Realtime draw streaming over UART (921600 baud) with live CRC/sequence monitoring.
+
+![Demo](demo.gif)
+
+---
+
+## Project Goal
+
+To build and validate a high-reliability, high-throughput embedded streaming pipeline
+for real-time visualization and stress testing.
 
 ---
 
@@ -29,7 +39,6 @@ Designed for stress-testing embedded streaming systems.
 
 ## System Architecture
 
-```
 ESP32-WROOM (Generator)
         |
      UART @921600
@@ -39,7 +48,25 @@ ESP32-S3 (Bridge)
    USB CDC
         |
        PC Viewer
-```
+
+---
+
+## Repository Structure
+
+bpu-stream-engine/
+ ├ s3_uart_bridge/
+ │   └ s3_uart_bridge.ino
+ │
+ ├ bpu_r4_safe.ino
+ ├ bpu_r4.cpp
+ ├ bpu_r4.h
+ │
+ ├ bpu_decode.py
+ ├ bpu_draw_viewer.py
+ ├ bpu_mat_viewer.py
+ │
+ ├ demo.gif
+ └ README.md
 
 ---
 
@@ -57,108 +84,116 @@ Runs on ESP32-WROOM.
 
 ---
 
+## Build & Flash
+
+### ESP32-WROOM
+
+1. Open bpu_r4_safe.ino
+2. Select board: ESP32 Dev Module
+3. Select correct COM port
+4. Upload firmware
+
+### ESP32-S3 Bridge
+
+Upload s3_uart_bridge/s3_uart_bridge.ino  
+Board: ESP32-S3 Dev Module
+
+---
+
 ## Wiring
 
-### UART Connection
+WROOM TX → S3 RX  
+WROOM RX → S3 TX (optional)  
+GND → GND  
 
-| WROOM | S3 |
-|-------|----|
-| TX | RX |
-| RX (optional) | TX |
-| GND | GND |
-
-Baudrate: 921600 (default firmware setting)
+Baudrate: 921600
 
 ---
 
 ## PC Viewer
 
-### Requirements
+### Install
 
-Install Python dependencies:
-
-```bash
-pip install pyserial matplotlib
-```
+pip install pyserial matplotlib numpy
 
 ---
 
-### List Serial Ports
+### List Ports
 
-```bash
 python -m serial.tools.list_ports
-```
-
-Example output:
-
-```
-COM11 USB Serial Device
-```
 
 ---
 
-### Run Viewer
+### Run
 
-```bash
 python bpu_mat_viewer.py COM11
-```
 
-(Change COM port as needed)
+(Change COM port if needed)
 
 ---
 
 ## Viewer Output
 
-The viewer displays:
-
 - Realtime draw points
-- Packets per second (PPS)
-- Draw points per second (DPS)
-- CRC error count
-- Sequence gap detection
+- PPS / DPS
+- CRC errors
+- Sequence gaps
 
-Stable run example:
+Stable example:
 
-```
 crc=0  seqGap=0  drop=0
-```
+
+---
+
+## Packet Format
+
+[MAGIC | TYPE | SEQ | LEN | PAYLOAD | CRC16]
+
+MAGIC = 0xB2  
+CRC = CCITT
+
+COBS framed, 0x00 delimited.
 
 ---
 
 ## Performance
 
-Tested configuration:
-
-- UART: 921600 baud
-- Continuous draw stress
-- 1000+ packets/sec sustained
-- Zero CRC errors in stable mode
+UART: 921600  
+1000+ pkt/s  
+10k+ pts/s  
+Zero CRC errors
 
 ---
 
 ## Project Status
 
-- Streaming pipeline: Stable
-- Error detection: Verified
-- PC visualization: Working
-- Stress mode: Enabled
-
-This repository is suitable as a reference implementation for embedded serial streaming systems.
+Streaming: Stable  
+Validation: Verified  
+Viewer: Working  
+Stress: Enabled  
 
 ---
 
 ## Future Work
 
-- Bidirectional control channel
-- Binary compression
-- Web-based viewer
-- Multi-device synchronization
-- FPGA offload experiments
+- Bidirectional control
+- Compression
+- Web viewer
+- Sync
+- FPGA offload
+
+---
+
+## License
+
+MIT License
 
 ---
 
 ## Author
 
-choihimchan 
-Embedded Systems / Streaming Engine Development  
+Himchan Choi  
+Embedded Systems Engineer  
+High-Speed Data Streaming & Visualization  
+
 GitHub: https://github.com/choihimchan
